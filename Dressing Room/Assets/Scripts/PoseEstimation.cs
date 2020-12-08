@@ -83,8 +83,17 @@ public class PoseEstimation : MonoBehaviour
             local_texture = null;
             Resources.UnloadUnusedAssets();
 
-            List<PoseNet.Pose> detected_body_parts = poses.Where(x => x.score >= pose_threshold).ToList();
-            Debug.Log(detected_body_parts.Count);
+            if (poses.Count() > 0)
+            {
+                PoseNet.Pose detected_pose = poses.Aggregate((maximum, current) => maximum.score > current.score ? maximum : current);
+                foreach (PoseNet.Keypoint keypoint in detected_pose.keypoints)
+                {
+                    Debug.Log(keypoint.part);
+                    Debug.Log(keypoint.position[0]);
+                    Debug.Log(keypoint.position[1]);
+                }
+                Debug.Log("");
+            }
         }
 
         yield return new WaitForSeconds(3);
