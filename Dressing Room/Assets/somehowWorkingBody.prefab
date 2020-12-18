@@ -1,0 +1,171 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8656125466068775105
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6671903847997393728, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_Name
+      value: rightWrist
+      objectReference: {fileID: 0}
+    - target: {fileID: -6290980343524930609, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_Name
+      value: leave
+      objectReference: {fileID: 0}
+    - target: {fileID: -5505297700179386349, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_Name
+      value: rightHip
+      objectReference: {fileID: 0}
+    - target: {fileID: -4175784164348014935, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_Name
+      value: rightKnee
+      objectReference: {fileID: 0}
+    - target: {fileID: -3708015308352778559, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_Name
+      value: leftWrist
+      objectReference: {fileID: 0}
+    - target: {fileID: -3156135651522007763, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_Name
+      value: rightShoulder
+      objectReference: {fileID: 0}
+    - target: {fileID: -2291002465693449482, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_Name
+      value: rightElbow
+      objectReference: {fileID: 0}
+    - target: {fileID: -1169686001739855177, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_Name
+      value: leftShoulder
+      objectReference: {fileID: 0}
+    - target: {fileID: -1115887506456056808, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_Name
+      value: upperTorso
+      objectReference: {fileID: 0}
+    - target: {fileID: 880129115546584187, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_Name
+      value: leftAnkle
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_Name
+      value: clth_sklt Variant 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3384074463461172139, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_Name
+      value: lowerTorso
+      objectReference: {fileID: 0}
+    - target: {fileID: 3697175804049162150, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_Name
+      value: rightAnkle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5558717885475722923, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_Name
+      value: leftKnee
+      objectReference: {fileID: 0}
+    - target: {fileID: 5886023628490669405, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_Name
+      value: leave
+      objectReference: {fileID: 0}
+    - target: {fileID: 6076732665171944264, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_Name
+      value: leftHip
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591056530169218376, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591056530169218376, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.032
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591056530169218376, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.15408744
+      objectReference: {fileID: 0}
+    - target: {fileID: 7614433100463224574, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_Name
+      value: leftElbow
+      objectReference: {fileID: 0}
+    - target: {fileID: 8436528422684470422, guid: 658dad3feda591f44be64054653d805c,
+        type: 3}
+      propertyPath: m_Name
+      value: middleHIp
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 658dad3feda591f44be64054653d805c, type: 3}
