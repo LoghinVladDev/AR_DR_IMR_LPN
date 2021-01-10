@@ -3,10 +3,7 @@ using UnityEngine;
 using TensorFlow;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using Google.Protobuf;
 
 public class PoseEstimation : MonoBehaviour
 {
@@ -16,12 +13,12 @@ public class PoseEstimation : MonoBehaviour
 
     private Camera camera;
 
+    public Texture2D inputTexture;
     WebCamTexture webcamTexture;
     Texture2D texture = null;
     int ImageSize = 512;
     PoseNet posenet = new PoseNet();
     PoseNet.Pose[] poses = null;
-    float pose_threshold = 0.05f;
     TFSession session;
     TFGraph graph;
     bool isPosing;
@@ -58,10 +55,12 @@ public class PoseEstimation : MonoBehaviour
     {
         this.camera = Camera.main;
         
+        /*
         WebCamDevice[] devices = WebCamTexture.devices;
         webcamTexture = new WebCamTexture(devices[0].name, Width, Height, FPS);
         GetComponent<Renderer>().material.mainTexture = webcamTexture;
         webcamTexture.Play();
+        */
 
         TextAsset graphModel = Resources.Load("PoseNet/frozen_model") as TextAsset;
         graph = new TFGraph();
@@ -73,9 +72,9 @@ public class PoseEstimation : MonoBehaviour
 
     void Update()
     {
-        var color32 = webcamTexture.GetPixels32();
+        var color32 = inputTexture.GetPixels32();
 
-        Texture2D new_texture = new Texture2D(webcamTexture.width, webcamTexture.height);
+        Texture2D new_texture = new Texture2D(inputTexture.width, inputTexture.height);
 
         new_texture.SetPixels32(color32);
         new_texture.Apply();
@@ -152,6 +151,14 @@ public class PoseEstimation : MonoBehaviour
                 recParse(p.transform.GetChild(i), joints, 1);
             }
         }
+
+        float bodyWidth = Mathf.Abs(joints["rightShoulder"].x - joints["leftShoulder"].x) * 2000;
+        float bodyHeight = (Mathf.Abs(joints["rightShoulder"].y - joints["rightAnkle"].y) + Mathf.Abs(joints["leftShoulder"].y - joints["leftAnkle"].y)) / 2 * 350;
+
+        float widthScale = bodyWidth / Width;
+        float heightScale = bodyHeight / Height;
+
+        p.transform.localScale = new Vector3(widthScale, heightScale, p.transform.localScale.z);
     }
 
     private class AxisInverter
@@ -195,7 +202,7 @@ public class PoseEstimation : MonoBehaviour
         Normalizer xNorm = new Normalizer(0, this.Width, Screen.currentResolution.width);
         Normalizer yNorm = new Normalizer(0, this.Height, Screen.currentResolution.height);
 
-        AxisInverter yAxisInv = new AxisInverter(0, this.Width);
+        AxisInverter yAxisInv = new AxisInverter(0, this.Height);
         
         if (texture != null)
         {
@@ -270,7 +277,7 @@ public class PoseEstimation : MonoBehaviour
                     // Debug.Log(leftEyePos.Item1.ToString() + ", " + rightEyePos.Item1.ToString());
                     
                     float xHead = (xNorm.normalize(leftEyePos.Item1) + xNorm.normalize(rightEyePos.Item1)) / 2;
-                    float yHead = (yNorm.normalize(yAxisInv.invert(leftEyePos.Item2)) + yNorm.normalize(yAxisInv.invert(rightEyePos.Item2))) / 2 - 150f;
+                    float yHead = (yNorm.normalize(yAxisInv.invert(leftEyePos.Item2)) + yNorm.normalize(yAxisInv.invert(rightEyePos.Item2))) / 2 - 60f;
 
                     // Debug.Log(xHead.ToString() + ", " + yHead.ToString());
 
@@ -281,7 +288,7 @@ public class PoseEstimation : MonoBehaviour
         }
 
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1.5f);
 
         StartCoroutine("PoseUpdate");
     }
