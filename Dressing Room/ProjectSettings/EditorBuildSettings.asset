@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/attemptCaLaHandicapati.unity
+    guid: 6d3fa9a9f24b8dd49b2611ed1b1b721a
   m_configObjects: {}

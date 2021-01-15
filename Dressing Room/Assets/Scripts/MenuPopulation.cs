@@ -8,7 +8,6 @@ public class MenuPopulation : MonoBehaviour
 {
     public Dropdown DesignerDropdown;
     public Dropdown SeasonDropdown;
-    public Dropdown CollectionDropdown;
     public Dropdown ClothTypeDropdown;
     public Dropdown ClothDropdown;
 
@@ -16,9 +15,7 @@ public class MenuPopulation : MonoBehaviour
         Dictionary<string,
             Dictionary<string,
                 Dictionary<string,
-                    Dictionary<string,
-                        object // Vuforia object
-                    >
+                    object // Vuforia object
                 >
             >
         >
@@ -59,25 +56,8 @@ public class MenuPopulation : MonoBehaviour
                 .ToList()
             ;
 
-            CollectionDropdown.ClearOptions();
-            CollectionDropdown.AddOptions(collectionDropdownDataList);
-
-            CollectionDropdown.value = 0;
-            CollectionDropdown.onValueChanged.Invoke(0);
-        });
-
-        CollectionDropdown.onValueChanged.AddListener(delegate {
-            string designerOption = DesignerDropdown.options[DesignerDropdown.value].text;
-            string seasonOption = SeasonDropdown.options[SeasonDropdown.value].text;
-            string collectionOption = CollectionDropdown.options[CollectionDropdown.value].text;
-
-            List<Dropdown.OptionData> clothTypeDropdownDataList = clothesData[designerOption][seasonOption][collectionOption].Keys
-                .Select(x => new Dropdown.OptionData(x))
-                .ToList()
-            ;
-
             ClothTypeDropdown.ClearOptions();
-            ClothTypeDropdown.AddOptions(clothTypeDropdownDataList);
+            ClothTypeDropdown.AddOptions(collectionDropdownDataList);
 
             ClothTypeDropdown.value = 0;
             ClothTypeDropdown.onValueChanged.Invoke(0);
@@ -86,10 +66,9 @@ public class MenuPopulation : MonoBehaviour
         ClothTypeDropdown.onValueChanged.AddListener(delegate {
             string designerOption = DesignerDropdown.options[DesignerDropdown.value].text;
             string seasonOption = SeasonDropdown.options[SeasonDropdown.value].text;
-            string collectionOption = CollectionDropdown.options[CollectionDropdown.value].text;
             string clothTypeOption = ClothTypeDropdown.options[ClothTypeDropdown.value].text;
 
-            List<Dropdown.OptionData> clothDropdownDataList = clothesData[designerOption][seasonOption][collectionOption][clothTypeOption].Keys
+            List<Dropdown.OptionData> clothDropdownDataList = clothesData[designerOption][seasonOption][clothTypeOption].Keys
                 .Select(x => new Dropdown.OptionData(x))
                 .ToList()
             ;
@@ -112,9 +91,7 @@ public class MenuPopulation : MonoBehaviour
             Dictionary<string,
                 Dictionary<string,
                     Dictionary<string,
-                        Dictionary<string,
-                            object
-                        >
+                        object
                     >
                 >
             >
@@ -141,9 +118,7 @@ public class MenuPopulation : MonoBehaviour
                 new Dictionary<string,
                     Dictionary<string,
                         Dictionary<string,
-                            Dictionary<string,
-                                object
-                            >
+                            object
                         >
                     >
                 >()
@@ -161,54 +136,34 @@ public class MenuPopulation : MonoBehaviour
                 seasonDir.Name,
                 new Dictionary<string,
                     Dictionary<string,
-                        Dictionary<string,
-                            object
-                        >
-                    >
-                >()
-            );
-
-            ParseCollectionCategories(seasonDir, designerName, seasonDir.Name);
-        }
-    }
-
-    private void ParseCollectionCategories(DirectoryInfo seasonDir, string designerName, string seasonName)
-    {
-        foreach (DirectoryInfo collectionDir in seasonDir.GetDirectories())
-        {
-            clothesData[designerName][seasonName].Add(
-                collectionDir.Name,
-                new Dictionary<string,
-                    Dictionary<string,
                         object
                     >
                 >()
             );
 
-            ParseClothTypeCategories(collectionDir, designerName, seasonName, collectionDir.Name);
+            ParseClothTypeCategories(seasonDir, designerName, seasonDir.Name);
         }
     }
-
-    private void ParseClothTypeCategories(DirectoryInfo collectionDir, string designerName, string seasonName, string collectionName)
+    private void ParseClothTypeCategories(DirectoryInfo collectionDir, string designerName, string seasonName)
     {
         foreach (DirectoryInfo clothTypeDir in collectionDir.GetDirectories())
         {
-            clothesData[designerName][seasonName][collectionName].Add(
+            clothesData[designerName][seasonName].Add(
                 clothTypeDir.Name,
                 new Dictionary<string,
                     object
                 >()
             );
 
-            ParseClothCategories(clothTypeDir, designerName, seasonName, collectionName, clothTypeDir.Name);
+            ParseClothCategories(clothTypeDir, designerName, seasonName, clothTypeDir.Name);
         }
     }
 
-    private void ParseClothCategories(DirectoryInfo clothTypeDir, string designerName, string seasonName, string collectionName, string clothTypeName)
+    private void ParseClothCategories(DirectoryInfo clothTypeDir, string designerName, string seasonName, string clothTypeName)
     {
-        foreach (DirectoryInfo clothDir in clothTypeDir.GetDirectories())
+        foreach (FileInfo clothDir in clothTypeDir.GetFiles("*.fbx"))
         {
-            clothesData[designerName][seasonName][collectionName][clothTypeName].Add(
+            clothesData[designerName][seasonName][clothTypeName].Add(
                 clothDir.Name,
                 null
             );

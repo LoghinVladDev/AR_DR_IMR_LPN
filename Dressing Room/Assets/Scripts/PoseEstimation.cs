@@ -9,7 +9,7 @@ public class PoseEstimation : MonoBehaviour
 {
     public int Width = 512;
     public int Height = 512;
-    public int FPS = 30;
+    public int FPS = 2000;
 
     private Camera camera;
 
@@ -55,12 +55,10 @@ public class PoseEstimation : MonoBehaviour
     {
         this.camera = Camera.main;
         
-        /*
         WebCamDevice[] devices = WebCamTexture.devices;
-        webcamTexture = new WebCamTexture(devices[0].name, Width, Height, FPS);
+        webcamTexture = new WebCamTexture(devices[0].name, Screen.width, Screen.height, FPS);
         GetComponent<Renderer>().material.mainTexture = webcamTexture;
         webcamTexture.Play();
-        */
 
         TextAsset graphModel = Resources.Load("PoseNet/frozen_model") as TextAsset;
         graph = new TFGraph();
@@ -72,9 +70,9 @@ public class PoseEstimation : MonoBehaviour
 
     void Update()
     {
-        var color32 = inputTexture.GetPixels32();
+        var color32 = webcamTexture.GetPixels32();
 
-        Texture2D new_texture = new Texture2D(inputTexture.width, inputTexture.height);
+        Texture2D new_texture = new Texture2D(webcamTexture.width, webcamTexture.height);
 
         new_texture.SetPixels32(color32);
         new_texture.Apply();
@@ -152,13 +150,17 @@ public class PoseEstimation : MonoBehaviour
             }
         }
 
-        float bodyWidth = Mathf.Abs(joints["rightShoulder"].x - joints["leftShoulder"].x) * 2000;
-        float bodyHeight = (Mathf.Abs(joints["rightShoulder"].y - joints["rightAnkle"].y) + Mathf.Abs(joints["leftShoulder"].y - joints["leftAnkle"].y)) / 2 * 350;
+        try
+        {
+            float bodyWidth = Mathf.Abs(joints["rightShoulder"].x - joints["leftShoulder"].x) * 7500;
+            float bodyHeight = (Mathf.Abs(joints["rightShoulder"].y - joints["rightAnkle"].y) + Mathf.Abs(joints["leftShoulder"].y - joints["leftAnkle"].y)) * 350;
 
-        float widthScale = bodyWidth / Width;
-        float heightScale = bodyHeight / Height;
+            float widthScale = bodyWidth / Screen.width;
+            float heightScale = bodyHeight / Screen.height;
 
-        p.transform.localScale = new Vector3(widthScale, heightScale, p.transform.localScale.z);
+            p.transform.localScale = new Vector3(widthScale, heightScale, p.transform.localScale.z);
+        }
+        catch (Exception) {}
     }
 
     private class AxisInverter
