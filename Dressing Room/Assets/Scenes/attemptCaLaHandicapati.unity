@@ -858,12 +858,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 236436602}
   m_CullTransparentMesh: 0
---- !u!1 &277873646 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 188bc146745ce534695a0ebdf47afc93,
-    type: 3}
-  m_PrefabInstance: {fileID: 903319624}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &292039604
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,7 +1541,8 @@ MonoBehaviour:
   Height: 512
   FPS: 30
   inputTexture: {fileID: 2800000, guid: f71198261ef55a2449c5e08e19070b51, type: 3}
-  clothMesh: {fileID: 277873646}
+  clothMesh: {fileID: 919132149155446097, guid: 3012d711c3a923e41a15dc75c97ec5d6,
+    type: 3}
 --- !u!1 &588619806
 GameObject:
   m_ObjectHideFlags: 0
@@ -2459,6 +2454,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: clth_sklt
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 188bc146745ce534695a0ebdf47afc93,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7614433100463224574, guid: 188bc146745ce534695a0ebdf47afc93,
         type: 3}
@@ -4447,6 +4447,7 @@ MonoBehaviour:
   SeasonDropdown: {fileID: 78533373}
   ClothTypeDropdown: {fileID: 1340785593}
   ClothDropdown: {fileID: 479004779}
+  poseEstimation: {fileID: 586258111}
 --- !u!4 &1891265773
 Transform:
   m_ObjectHideFlags: 0

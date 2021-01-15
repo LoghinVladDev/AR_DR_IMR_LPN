@@ -11,6 +11,8 @@ public class MenuPopulation : MonoBehaviour
     public Dropdown ClothTypeDropdown;
     public Dropdown ClothDropdown;
 
+    public PoseEstimation poseEstimation;
+
     private Dictionary<string,
         Dictionary<string,
             Dictionary<string,
@@ -81,7 +83,18 @@ public class MenuPopulation : MonoBehaviour
         });
 
         ClothDropdown.onValueChanged.AddListener(delegate {
-            
+            string designer = DesignerDropdown.options[DesignerDropdown.value].text;
+            string season = SeasonDropdown.options[SeasonDropdown.value].text;
+            string clothType = ClothTypeDropdown.options[ClothTypeDropdown.value].text;
+            string cloth = ClothDropdown.options[ClothDropdown.value].text;
+
+            string path = "Clothes/" + designer + "/" + season + "/" + clothType + "/" + cloth.Replace(".fbx", "");
+            Debug.Log(path);
+            GameObject newObject = Instantiate(Resources.Load(path)) as GameObject;
+
+            if (poseEstimation.clothMesh != null)
+                poseEstimation.clothMesh.SetActive(false);
+            poseEstimation.clothMesh = newObject;
         });
     }
 
